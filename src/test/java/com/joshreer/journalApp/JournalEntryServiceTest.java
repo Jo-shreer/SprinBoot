@@ -11,20 +11,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-// import org.junit.jupiter.api.extension.ExtendWith;
-// import org.mockito.InjectMocks;
-// import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.joshreer.journalApp.Entity.JournalEntry;
 import com.joshreer.journalApp.repository.JournalEntryRepository;
 import com.joshreer.journalApp.service.JournalEntryService;
 
 @ExtendWith(MockitoExtension.class)
-public class JournalEntryRepositoryControllerTest {
-
+public class JournalEntryServiceTest 
+{
     @Mock
     JournalEntryRepository journalEntryRepository;
 
@@ -39,6 +35,7 @@ public class JournalEntryRepositoryControllerTest {
         journalEntry.setContent("abc");
         journalEntry.setTitle("sbr");
         journalEntry.setId(id);
+        
         Mockito.when(journalEntryService.saveEntry(journalEntry)).thenReturn(journalEntry);
         JournalEntry saved = journalEntryService.saveEntry(journalEntry);
         assertNotNull(saved);
