@@ -16,9 +16,9 @@ public class JournalEntryService
     @Autowired
     private JournalEntryRepository journalEntryRepository;
 
-    public void saveEntry(JournalEntry journalEntry)
+    public JournalEntry saveEntry(JournalEntry journalEntry)
     {
-        journalEntryRepository.save(journalEntry);
+        return journalEntryRepository.save(journalEntry);
     }
 
     public List<JournalEntry> getAll()
