@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,8 @@ public class JournalEntryControllerV2
     @Autowired
     private JournalEntryService journalEntryService;
 
+    private static final Logger logger = LoggerFactory.getLogger(JournalEntryControllerV2.class);
+
     @PostMapping()
     public ResponseEntity<JournalEntry> CreateJournalEntry(@RequestBody JournalEntry myEntity) 
     {
@@ -36,10 +40,12 @@ public class JournalEntryControllerV2
        {
             myEntity.setDate(LocalDateTime.now());
             journalEntryService.saveEntry(myEntity);
+            logger.info("Successful CreateJournalEntry");
             return new ResponseEntity<>(myEntity, HttpStatus.CREATED);
        }
        catch(Exception e)
        {
+            logger.error("Exception occured while CreateJournalEntry");
             return new ResponseEntity<>(myEntity, HttpStatus.BAD_REQUEST);
        }
     } 
